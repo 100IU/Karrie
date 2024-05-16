@@ -489,9 +489,3 @@ document.querySelector('.dismiss').addEventListener('click', function(e) {
 	localStorage['funkyLetters:config'] = JSON.stringify(config);
 });
 
-setTimeout(() => {
-  //  window.location.href='../index1.html'
-}, 5000);
-document.querySelector('#btn').addEventListener('click',function(){
-  window.location.href='index1.html'
-})
