@@ -25,7 +25,14 @@ var polaroidGallery = (function () {
     var out = '';
     var i;
     for (i = 0; i < arr.length; i++) {
-      // console.log(arr[i]);
+     
+     let filePath = arr[i].src;  
+     // 先通过最后一个'/'找到文件名部分  
+let fileNameWithExtension = filePath.substring(filePath.lastIndexOf('/') + 1);  
+  
+// 再通过'.'找到文件名（不包括扩展名）部分  
+let fileName = fileNameWithExtension.split('.')[0]
+console.log(fileName);
       if (arr[i].type === 'image') {
         out +=
           '<figure id="' +
@@ -34,9 +41,11 @@ var polaroidGallery = (function () {
           '<img src="img/' +
           arr[i].name +
           '" alt="' +
-          arr[i].name +
-          '" data-title="' +
-          arr[i].type +
+          fileName +
+          '"alt="' +
+          fileName +
+          '" data-date="' +
+          arr[i].caption +
           '"/>' + '<audio style="display:none">  <source src="'+arr[i].src+'" type="audio/mp4">  </audio>' +
           '<figcaption>' +
           arr[i].caption +
@@ -144,7 +153,7 @@ var polaroidGallery = (function () {
   }
 
   function select(item, type,index) {
-    console.log(type,index);
+    // console.log(item.querySelector('img').getAttribute('alt'),type,index);
 
     // console.log(item,item.getElementsByTagName('img')[0].getAttribute('data-title'))
     if (type === 'isclick') {
@@ -165,12 +174,14 @@ var polaroidGallery = (function () {
       } else {
       //  console.log(document.querySelectorAll('audio'))
         for (let index = 0; index < document.querySelectorAll('audio').length; index++) {
-          console.log(document.querySelectorAll('audio')[index])
-          // audio.currentTime = 0; 
+          document.querySelectorAll('figcaption')[index].innerHTML = document.querySelectorAll('img')[index].getAttribute('data-date')
            document.querySelectorAll('audio')[index].pause()
            document.querySelectorAll('audio')[index].currentTime = 0; 
+           console.log(document.querySelectorAll('img')[index].getAttribute('data-date'))
+           
         }
-        //  document.ATTRIBUT
+      
+        item.querySelector('figcaption').innerHTML = item.querySelector('img').getAttribute('alt')
         
     
       item.querySelector('audio').play();
