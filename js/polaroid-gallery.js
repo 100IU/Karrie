@@ -319,7 +319,7 @@ console.log(fileName);
       shuffleAll();
     });
     go.addEventListener('click',function(){
-      window.location.href = '/4.html'
+      window.location.href = '4.html'
     })
   }
 
